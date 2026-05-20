@@ -11,7 +11,7 @@ restore operations, database health checks, and operation logs from inside Odoo.
     "category": "Administration",
     "author": "Habib Mohammed",
     "website": "https://github.com/HMA202/odoo-saas",
-    "license": "MIT",
+    "license": "LGPL-3",
     "depends": ["base"],
     "data": [
         "security/ir.model.access.csv",

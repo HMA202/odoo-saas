@@ -636,17 +636,13 @@ sudo systemctl restart odoo
 
 ## License
 
-This project is licensed under the MIT License.
-
-You are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software, as long as the copyright notice and the license text are included.
+This project is licensed under the LGPL-3 License.
 
 ---
 
 ## الترخيص
 
-هذا المشروع مرخّص تحت رخصة MIT.
-
-يمكنك استخدام هذا الموديول ونسخه وتعديله ونشره وتوزيعه، بشرط إبقاء إشعار حقوق النشر ونص الترخيص داخل المشروع.
+هذا المشروع مرخّص تحت رخصة LGPL-3.
 
 ---
 

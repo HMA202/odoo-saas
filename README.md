@@ -2,9 +2,21 @@
 
 <div align="center">
 
-**A custom Odoo 19 module for managing SaaS clients, plans, databases, subscriptions, backups, restores, health checks, and operation logs.**
+<img src="docs/images/odoosaaslogo.png" alt="Odoo SaaS Manager Logo" width="220" />
 
-**موديول مخصص لـ Odoo 19 لإدارة عملاء SaaS، الباقات، قواعد البيانات، الاشتراكات، النسخ الاحتياطي، الاسترجاع، الفحص، وسجلات العمليات.**
+<br />
+
+![Odoo](https://img.shields.io/badge/Odoo-19.0-714B67?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supported-4169E1?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+
+**A custom open-source Odoo 19 module for managing SaaS clients, plans, databases, subscriptions, backups, restores, health checks, and operation logs.**
+
+**موديول مفتوح المصدر مخصص لـ Odoo 19 لإدارة عملاء SaaS، الباقات، قواعد البيانات، الاشتراكات، النسخ الاحتياطي، الاسترجاع، الفحص، وسجلات العمليات.**
+
+[Features](#main-features) • [Screenshots](#screenshots) • [Installation](#installation) • [Arabic](#العربية) • [License](#license)
 
 </div>
 
@@ -14,9 +26,11 @@
 
 ### Overview
 
-`saas` is a custom Odoo 19 module designed to manage SaaS client databases from inside Odoo. It allows an administrator to create client databases from a template database, check database status, open databases, create backups, restore backups, suspend or activate databases, manage subscription status, and track every important operation through a dedicated logs model.
+`saas` is a custom **Odoo 19** module designed to manage SaaS client databases from inside Odoo. It allows an administrator to create client databases from a template database, check database status, open databases, create backups, restore backups, suspend or activate databases, manage subscription status, and track every important operation through a dedicated logs model.
 
-This module is useful for SaaS-style Odoo hosting where each client has a separate database and a defined subscription plan.
+This module is useful for SaaS-style Odoo hosting where each client can have a separate database and a defined subscription plan.
+
+> This repository is designed to be reusable by the community. Update paths and PostgreSQL settings according to your own environment before production use.
 
 ---
 
@@ -31,11 +45,31 @@ This module is useful for SaaS-style Odoo hosting where each client has a separa
 - Restore the last backup using `pg_restore`.
 - Suspend and activate client databases.
 - Renew, expire, cancel, and check subscriptions.
-- Auto-check subscriptions using cron logic.
+- Auto-check subscriptions using scheduled cron logic.
 - Auto-suspend expired clients after a grace period.
 - Store operation logs for admin tracking.
-- Arabic digit normalization for database fields.
-- Arabic translation support using `i18n/ar.po`.
+- Normalize Arabic/Persian digits for database-related fields.
+- Support Arabic translation using `i18n/ar.po`.
+
+---
+
+### Screenshots
+
+#### English Interface
+
+![Odoo SaaS English Screenshot](docs/images/odooEN.png)
+
+#### Arabic Interface
+
+![Odoo SaaS Arabic Screenshot](docs/images/odooAR.png)
+
+#### English Demo
+
+![Odoo SaaS English Demo](docs/images/odoosaasEN.gif)
+
+#### Arabic Demo
+
+![Odoo SaaS Arabic Demo](docs/images/odoosaasAR.gif)
 
 ---
 
@@ -45,7 +79,16 @@ This module is useful for SaaS-style Odoo hosting where each client has a separa
 saas/
 ├── __init__.py
 ├── __manifest__.py
+├── LICENSE
+├── README.md
 ├── data/
+├── docs/
+│   └── images/
+│       ├── odoosaaslogo.png
+│       ├── odooAR.png
+│       ├── odooEN.png
+│       ├── odoosaasAR.gif
+│       └── odoosaasEN.gif
 ├── i18n/
 │   └── ar.po
 ├── models/
@@ -158,7 +201,7 @@ Important methods:
 | `action_restore_last_backup()` | Restores the latest saved backup using `pg_restore`. |
 | `action_suspend_database()` | Suspends an active client database. |
 | `action_activate_database()` | Activates a suspended client database. |
-| `action_renew_subscription()` | Renews subscription for one month. |
+| `action_renew_subscription()` | Renews subscription. |
 | `action_check_subscription()` | Checks whether the subscription is valid or expired. |
 | `action_mark_subscription_expired()` | Manually marks subscription as expired. |
 | `action_cancel_subscription()` | Cancels subscription and suspends active database. |
@@ -169,7 +212,7 @@ Important methods:
 
 #### `saas.log`
 
-The `saas.log` model stores operation history for every important SaaS action.
+The `saas.log` model stores operation history for important SaaS actions.
 
 Main fields:
 
@@ -199,86 +242,54 @@ Supported operations:
 
 ---
 
-### PostgreSQL Configuration
+### Requirements
 
-The module currently uses the following local PostgreSQL settings inside `saas_client.py`:
+- Odoo 19
+- Python 3.12+
+- PostgreSQL
+- PostgreSQL client tools available in the server environment:
+  - `psql`
+  - `createdb`
+  - `pg_dump`
+  - `pg_restore`
+- A configured Odoo custom addons path
+- A PostgreSQL user with permission to create, inspect, backup, and restore databases
 
-```python
-PG_BIN = "/usr/local/opt/postgresql@18/bin"
-PG_PORT = "5433"
-PG_OWNER = "odoo"
-BACKUP_DIR = "/Users/hma/odoo/19/backups"
-```
-
-Update these values if your server paths or PostgreSQL configuration are different.
 
 ---
 
 ### Installation
 
-Copy the module into your custom addons directory:
+Clone the repository into your custom addons directory:
 
 ```bash
-/Users/hma/odoo/19/custom-addons/saas
+cd /path/to/custom-addons
+git clone https://github.com/HMA202/odoo-saas.git saas
 ```
 
-Activate the virtual environment:
+Activate your Odoo virtual environment:
 
 ```bash
-cd /Users/hma/odoo/19/odoo
-source /Users/hma/odoo/19/venv/bin/activate
+cd /path/to/odoo
+source /path/to/venv/bin/activate
+```
+
+Update your Odoo configuration and make sure `addons_path` includes your custom addons directory:
+
+```ini
+addons_path = /path/to/odoo/addons,/path/to/custom-addons
 ```
 
 Update the module:
 
 ```bash
-./odoo-bin -c /Users/hma/odoo/19/odoo.conf -u saas -d odoo19
+./odoo-bin -c /path/to/odoo.conf -u saas -d your_database_name
 ```
 
 Run Odoo normally:
 
 ```bash
-./odoo-bin -c /Users/hma/odoo/19/odoo.conf -d odoo19
-```
-
----
-
-### Git Workflow
-
-Initialize the repository inside the module folder:
-
-```bash
-cd /Users/hma/odoo/19/custom-addons/saas
-git init
-git branch -M main
-```
-
-Add a `.gitignore` file:
-
-```gitignore
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.DS_Store
-*.log
-.env
-.venv/
-venv/
-```
-
-Commit changes:
-
-```bash
-git add .
-git commit -m "Initial SaaS module"
-```
-
-Push to GitHub:
-
-```bash
-git remote add origin https://github.com/HMA202/odoo-saas.git
-git push -u origin main
+./odoo-bin -c /path/to/odoo.conf -d your_database_name
 ```
 
 ---
@@ -296,7 +307,7 @@ Then update the module:
 
 ```bash
 cd /path/to/odoo
-source venv/bin/activate
+source /path/to/venv/bin/activate
 ./odoo-bin -c /path/to/odoo.conf -u saas -d your_database_name
 ```
 
@@ -308,15 +319,36 @@ sudo systemctl restart odoo
 
 ---
 
+### GitHub Topics
+
+Recommended repository topics:
+
+```text
+odoo
+odoo19
+odoo-module
+saas
+saas-management
+python
+postgresql
+erp
+backup
+subscription-management
+open-source
+```
+
+---
+
 ### Important Notes
 
 - Do not push this module inside the official Odoo source repository.
 - Keep this module as a separate Git repository.
 - Make sure the Odoo config includes the custom addons path.
-- Make sure PostgreSQL tools such as `psql`, `createdb`, `pg_dump`, and `pg_restore` are available.
+- Make sure PostgreSQL tools are available in the server environment.
 - Make sure the Odoo user has permission to run PostgreSQL commands.
 - Keep backups outside the Git repository.
 - Keep secrets and environment variables out of Git.
+- Review and test the module carefully before using it in production.
 
 ---
 
@@ -324,9 +356,11 @@ sudo systemctl restart odoo
 
 ### نظرة عامة
 
-`saas` هو موديول مخصص لـ Odoo 19 لإدارة عملاء SaaS وقواعد بياناتهم من داخل أودو. يتيح للمدير إنشاء قاعدة بيانات للعميل من قاعدة بيانات قالب، فحص حالة قاعدة البيانات، فتح قاعدة العميل، إنشاء نسخة احتياطية، استرجاع النسخة الاحتياطية، تعليق أو تفعيل قاعدة البيانات، إدارة حالة الاشتراك، وتسجيل كل عملية مهمة في سجل خاص.
+`saas` هو موديول مفتوح المصدر مخصص لـ **Odoo 19** لإدارة عملاء SaaS وقواعد بياناتهم من داخل أودو. يتيح للمدير إنشاء قاعدة بيانات للعميل من قاعدة بيانات قالب، فحص حالة قاعدة البيانات، فتح قاعدة العميل، إنشاء نسخة احتياطية، استرجاع النسخة الاحتياطية، تعليق أو تفعيل قاعدة البيانات، إدارة حالة الاشتراك، وتسجيل كل عملية مهمة في سجل خاص.
 
-هذا الموديول مناسب لفكرة استضافة Odoo بنظام SaaS، بحيث يكون لكل عميل قاعدة بيانات مستقلة وباقة اشتراك محددة.
+هذا الموديول مناسب لفكرة استضافة Odoo بنظام SaaS، بحيث يمكن أن يكون لكل عميل قاعدة بيانات مستقلة وباقة اشتراك محددة.
+
+> تم تجهيز هذا المشروع ليكون عامًا وقابلًا لإعادة الاستخدام. عدّل المسارات وإعدادات PostgreSQL حسب بيئتك قبل استخدامه في الإنتاج.
 
 ---
 
@@ -341,11 +375,31 @@ sudo systemctl restart odoo
 - استرجاع آخر نسخة احتياطية باستخدام `pg_restore`.
 - تعليق وتفعيل قواعد بيانات العملاء.
 - تجديد، إلغاء، إنهاء، وفحص الاشتراكات.
-- فحص الاشتراكات بشكل تلقائي عبر منطق كرون.
+- فحص الاشتراكات بشكل تلقائي عبر منطق مجدول.
 - تعليق العميل تلقائيًا بعد انتهاء فترة السماح.
 - تسجيل العمليات في سجل إداري واضح.
 - تحويل الأرقام العربية والفارسية إلى أرقام إنجليزية في الحقول المهمة.
 - دعم الترجمة العربية من خلال ملف `i18n/ar.po`.
+
+---
+
+### الصور والعروض
+
+#### الواجهة الإنجليزية
+
+![صورة الواجهة الإنجليزية](docs/images/odooEN.png)
+
+#### الواجهة العربية
+
+![صورة الواجهة العربية](docs/images/odooAR.png)
+
+#### عرض متحرك باللغة الإنجليزية
+
+![عرض إنجليزي متحرك](docs/images/odoosaasEN.gif)
+
+#### عرض متحرك باللغة العربية
+
+![عرض عربي متحرك](docs/images/odoosaasAR.gif)
 
 ---
 
@@ -355,7 +409,16 @@ sudo systemctl restart odoo
 saas/
 ├── __init__.py
 ├── __manifest__.py
+├── LICENSE
+├── README.md
 ├── data/
+├── docs/
+│   └── images/
+│       ├── odoosaaslogo.png
+│       ├── odooAR.png
+│       ├── odooEN.png
+│       ├── odoosaasAR.gif
+│       └── odoosaasEN.gif
 ├── i18n/
 │   └── ar.po
 ├── models/
@@ -468,7 +531,7 @@ saas/
 | `action_restore_last_backup()` | استرجاع آخر نسخة احتياطية باستخدام `pg_restore`. |
 | `action_suspend_database()` | تعليق قاعدة بيانات نشطة. |
 | `action_activate_database()` | تفعيل قاعدة بيانات معلقة. |
-| `action_renew_subscription()` | تجديد الاشتراك لمدة شهر. |
+| `action_renew_subscription()` | تجديد الاشتراك. |
 | `action_check_subscription()` | فحص حالة الاشتراك. |
 | `action_mark_subscription_expired()` | جعل الاشتراك منتهي يدويًا. |
 | `action_cancel_subscription()` | إلغاء الاشتراك وتعليق القاعدة إذا كانت نشطة. |
@@ -509,86 +572,53 @@ saas/
 
 ---
 
-### إعدادات PostgreSQL
+### المتطلبات
 
-الموديول يستخدم الإعدادات التالية داخل `saas_client.py`:
-
-```python
-PG_BIN = "/usr/local/opt/postgresql@18/bin"
-PG_PORT = "5433"
-PG_OWNER = "odoo"
-BACKUP_DIR = "/Users/hma/odoo/19/backups"
-```
-
-غيّر هذه القيم إذا كانت بيئة السيرفر أو مسارات PostgreSQL مختلفة.
+- Odoo 19
+- Python 3.12 أو أحدث
+- PostgreSQL
+- توفر أدوات PostgreSQL في بيئة السيرفر:
+  - `psql`
+  - `createdb`
+  - `pg_dump`
+  - `pg_restore`
+- تفعيل مسار الإضافات المخصصة في إعدادات Odoo
+- مستخدم PostgreSQL لديه صلاحية إنشاء وفحص ونسخ واسترجاع قواعد البيانات
 
 ---
 
 ### التثبيت
 
-ضع الموديول داخل مجلد الإضافات المخصصة:
+انسخ المشروع داخل مجلد الإضافات المخصصة:
 
 ```bash
-/Users/hma/odoo/19/custom-addons/saas
+cd /path/to/custom-addons
+git clone https://github.com/HMA202/odoo-saas.git saas
 ```
 
 فعّل البيئة الافتراضية:
 
 ```bash
-cd /Users/hma/odoo/19/odoo
-source /Users/hma/odoo/19/venv/bin/activate
+cd /path/to/odoo
+source /path/to/venv/bin/activate
+```
+
+تأكد أن ملف إعدادات Odoo يحتوي على مسار الإضافات المخصصة:
+
+```ini
+addons_path = /path/to/odoo/addons,/path/to/custom-addons
 ```
 
 حدّث الموديول:
 
 ```bash
-./odoo-bin -c /Users/hma/odoo/19/odoo.conf -u saas -d odoo19
+./odoo-bin -c /path/to/odoo.conf -u saas -d your_database_name
 ```
 
 شغّل Odoo بشكل طبيعي:
 
 ```bash
-./odoo-bin -c /Users/hma/odoo/19/odoo.conf -d odoo19
-```
-
----
-
-### طريقة الرفع إلى GitHub
-
-من داخل مجلد الموديول:
-
-```bash
-cd /Users/hma/odoo/19/custom-addons/saas
-git init
-git branch -M main
-```
-
-ملف `.gitignore` المقترح:
-
-```gitignore
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.DS_Store
-*.log
-.env
-.venv/
-venv/
-```
-
-حفظ التغييرات:
-
-```bash
-git add .
-git commit -m "Initial SaaS module"
-```
-
-رفع المشروع إلى GitHub:
-
-```bash
-git remote add origin https://github.com/HMA202/odoo-saas.git
-git push -u origin main
+./odoo-bin -c /path/to/odoo.conf -d your_database_name
 ```
 
 ---
@@ -606,7 +636,7 @@ git clone https://github.com/HMA202/odoo-saas.git saas
 
 ```bash
 cd /path/to/odoo
-source venv/bin/activate
+source /path/to/venv/bin/activate
 ./odoo-bin -c /path/to/odoo.conf -u saas -d your_database_name
 ```
 
@@ -618,15 +648,34 @@ sudo systemctl restart odoo
 
 ---
 
+### تاقات GitHub المقترحة
+
+```text
+odoo
+odoo19
+odoo-module
+saas
+saas-management
+python
+postgresql
+erp
+backup
+subscription-management
+open-source
+```
+
+---
+
 ### ملاحظات مهمة
 
 - لا ترفع الموديول داخل سورس Odoo الرسمي.
 - الأفضل أن يكون الموديول repository مستقل.
 - تأكد أن `addons_path` في ملف إعدادات Odoo يحتوي على مسار `custom-addons`.
-- تأكد من توفر أدوات PostgreSQL مثل `psql`, `createdb`, `pg_dump`, و `pg_restore`.
+- تأكد من توفر أدوات PostgreSQL في بيئة السيرفر.
 - تأكد أن مستخدم Odoo لديه صلاحية تنفيذ أوامر PostgreSQL المطلوبة.
 - لا ترفع النسخ الاحتياطية إلى Git.
 - لا ترفع كلمات المرور أو ملفات البيئة إلى Git.
+- اختبر الموديول جيدًا قبل استخدامه في الإنتاج.
 
 ---
 

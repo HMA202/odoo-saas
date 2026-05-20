@@ -632,11 +632,21 @@ sudo systemctl restart odoo
 
 ## License
 
-This module is currently private/internal unless a license is added.
+This project is licensed under the MIT License.
+
+You are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software, as long as the copyright notice and the license text are included.
+
+---
+
+## الترخيص
+
+هذا المشروع مرخّص تحت رخصة MIT.
+
+يمكنك استخدام هذا الموديول ونسخه وتعديله ونشره وتوزيعه، بشرط إبقاء إشعار حقوق النشر ونص الترخيص داخل المشروع.
 
 ---
 
 ## Author
 
-Developed by **Habib Mohammed**.
+Developed by [**Habib Mohammed**](https://github.com/HMA202).
 

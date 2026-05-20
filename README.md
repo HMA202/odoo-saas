@@ -315,26 +315,6 @@ sudo systemctl restart odoo
 
 ---
 
-### GitHub Topics
-
-Recommended repository topics:
-
-```text
-odoo
-odoo19
-odoo-module
-saas
-saas-management
-python
-postgresql
-erp
-backup
-subscription-management
-open-source
-```
-
----
-
 ### Important Notes
 
 - Do not push this module inside the official Odoo source repository.
@@ -637,24 +617,6 @@ source /path/to/venv/bin/activate
 
 ```bash
 sudo systemctl restart odoo
-```
-
----
-
-### تاقات GitHub المقترحة
-
-```text
-odoo
-odoo19
-odoo-module
-saas
-saas-management
-python
-postgresql
-erp
-backup
-subscription-management
-open-source
 ```
 
 ---

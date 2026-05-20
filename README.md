@@ -58,18 +58,14 @@ This module is useful for SaaS-style Odoo hosting where each client can have a s
 #### English Interface
 
 ![Odoo SaaS English Screenshot](docs/images/odooEN.png)
+![Odoo SaaS English Screenshot2](docs/images/odoosaasEN.gif)
 
 #### Arabic Interface
 
 ![Odoo SaaS Arabic Screenshot](docs/images/odooAR.png)
+![Odoo SaaS Arabic Screenshot2](docs/images/odoosaasAR.gif)
 
-#### English Demo
 
-![Odoo SaaS English Demo](docs/images/odoosaasEN.gif)
-
-#### Arabic Demo
-
-![Odoo SaaS Arabic Demo](docs/images/odoosaasAR.gif)
 
 ---
 
@@ -388,18 +384,15 @@ open-source
 #### الواجهة الإنجليزية
 
 ![صورة الواجهة الإنجليزية](docs/images/odooEN.png)
+![صورة الواجهة الإنجليزية2](docs/images/odoosaasEN.gif)
+
 
 #### الواجهة العربية
 
 ![صورة الواجهة العربية](docs/images/odooAR.png)
+![صورة الواجهة العربية2](docs/images/odoosaasAR.gif)
 
-#### عرض متحرك باللغة الإنجليزية
 
-![عرض إنجليزي متحرك](docs/images/odoosaasEN.gif)
-
-#### عرض متحرك باللغة العربية
-
-![عرض عربي متحرك](docs/images/odoosaasAR.gif)
 
 ---
 

@@ -1,0 +1,20 @@
+{
+    "name": "SaaS",
+    "version": "19.0.1.0.0",
+    "category": "Tools",
+    "summary": "Manage SaaS plans and Odoo customer databases",
+    "author": "habib mohammed",
+    "website": "https://github.com/HMA202",
+    "license": "LGPL-3",
+    "depends": ["base"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/saas_plan_views.xml",
+        "views/saas_client_views.xml",
+        "views/saas_log_views.xml",
+        "views/menu.xml",
+        "data/cron.xml",
+    ],
+    "installable": True,
+    "application": True,
+}

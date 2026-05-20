@@ -22,6 +22,16 @@
 
 ---
 
+## Links
+
+<p align="center">
+  <a href="https://apps.odoo.com/apps/modules/19.0/codezy_odoo_saas_manager">
+    <strong>View on Odoo Apps Store</strong>
+  </a>
+</p>
+
+---
+
 ## English
 
 ### Overview
